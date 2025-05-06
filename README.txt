@@ -1,6 +1,25 @@
 Talking_photo Setup Guide (All-in-One Instructions)
 ==============================================
 
+0. Project GitHub Repository (Talking_photo)
+--------------------------------------------
+If the project is already in your laptop, you can skip this step.
+
+Otherwise, to clone the GitHub repository, follow these steps:
+
+A) Make sure Git is installed on your system.
+   Download Git from: https://git-scm.com/downloads
+
+B) Open Command Prompt (CMD) or PowerShell and run:
+
+   git clone https://github.com/Hetviradadiya/Talking_photo.git
+
+This will create a folder named "Talking_photo" with all project code.
+
+Then navigate into the project:
+
+   cd Talking_photo
+
 1. Install Python 3.9 (if not already installed)
 -----------------------------------------------
 Download Python 3.9 from:
