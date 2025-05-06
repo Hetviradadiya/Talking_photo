@@ -4,7 +4,7 @@ opencv-python==4.11.0.86
 moviepy==1.0.3
 numpy==1.23.5
 dlib==19.22.99
-# torch==2.6.0
+torch==2.6.0
 pydub==0.25.1
 torch==1.11.0 
 torchvision==0.12.0
