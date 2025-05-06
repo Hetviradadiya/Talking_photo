@@ -1,35 +1,88 @@
-download python 3.9
+Talking_photo Setup Guide (All-in-One Instructions)
+==============================================
 
+1. Install Python 3.9 (if not already installed)
+-----------------------------------------------
+Download Python 3.9 from:
+https://www.python.org/downloads/release/python-390/
+
+2. (Optional but Recommended) Install Miniconda if Conda is not installed
+-------------------------------------------------------------------------
+Download Miniconda from:
+https://docs.conda.io/en/latest/miniconda.html
+
+Choose the Python 3.8 or 3.9 version for your OS (Windows 64-bit installer).
+
+After installation, open CMD or PowerShell and run:
+conda --version
+to verify that conda is available.
+
+3. Create Virtual Environment (Two Options)
+-------------------------------------------
+
+Option A: Using venv (basic Python virtual environment)
+-------------------------------------------------------
 py -3.9 -m venv sadtalker_env
 
-in cmd
+To activate (on Windows CMD):
+sadtalker_env\Scripts\activate
+
+Option B: Using Conda (Recommended for SadTalker)
+-------------------------------------------------
 conda create -n sadtalker python=3.8 -y
 conda activate sadtalker
 conda init powershell
 
+Note: Python 3.8 is more compatible with SadTalker and related dependencies.
+
+4. Install Required Packages
+----------------------------
 pip install opencv-python pyttsx3
 pip install requests
 
--> conda activate base this was show in any drive
+5. GFP-GAN Weights Setup
+------------------------
+Create this folder inside your project directory:
+gfpgan/weights/
 
-add folder name gfpgan/weights and add files
+Download required weights from:
+https://drive.google.com/drive/folders/1D3wIA1RXgZMAbi8CJq8oprOrrWc9tbqJ?usp=sharing
 
--> Drive link- https://drive.google.com/drive/folders/1D3wIA1RXgZMAbi8CJq8oprOrrWc9tbqJ?usp=sharing
+Place the files into: gfpgan/weights/
 
-download files for model create checkpoints folder in sadtakler folder and install this all files
+6. Download SadTalker Checkpoint Files
+--------------------------------------
+Create a folder named:
+checkpoints/
 
--> https://github.com/OpenTalker/SadTalker/releases/download/v0.0.2/epoch_20.pth
+Download and move the following files into checkpoints/:
 
--> https://github.com/OpenTalker/SadTalker/releases/download/v0.0.2/mapping_00109-model.pth.tar
+A) From GitHub:
+   https://github.com/OpenTalker/SadTalker/releases/download/v0.0.2/epoch_20.pth
+   https://github.com/OpenTalker/SadTalker/releases/download/v0.0.2/mapping_00109-model.pth.tar
 
-->python download_models.py
+B) From Hugging Face:
+   https://huggingface.co/spaces/vinthony/SadTalker/blob/639be9b82f2a4749035bcc2e3bf8a34ad7c151b9/checkpoints/auido2pose_00140-model.pth
 
-https://huggingface.co/spaces/vinthony/SadTalker/blob/639be9b82f2a4749035bcc2e3bf8a34ad7c151b9/checkpoints/auido2pose_00140-model.pth?utm_source=chatgpt.com
-download this file
+auido2pose_00140-model.pth
 
--> auido2pose_00140-model.pth
+Optional: Run script to download models (if available in your project)
+-----------------------------------------------------------------------
+python download_models.py
 
+7. Alternative Download Source for Checkpoints
+----------------------------------------------
+If the above links don’t work, download all model files from this Drive folder:
+https://drive.google.com/drive/folders/1MzumKHHqk-Vq8bzsKioz9RNj_0sepTmF?usp=sharing
 
-or you can download files from here for checkpoints
+8. Conda Base Prompt Issue
+--------------------------
+If you see 'base' in the terminal instead of 'sadtalker':
 
--> Drive link- https://drive.google.com/drive/folders/1MzumKHHqk-Vq8bzsKioz9RNj_0sepTmF?usp=sharing
+Run this:
+conda activate sadtalker
+
+Make sure you're using the same terminal where `conda init` was run (CMD or PowerShell).
+
+End of Setup Guide
+==============================================
