@@ -5,39 +5,10 @@ from .utils.tts import generate_gendered_audio
 from .utils.lipsync import generate_video
 import os
 from django.conf import settings
-from django.contrib import messages  # Import this at the top
+from django.contrib import messages  
 import subprocess
 from .utils.gender_detect import detect_gender
 
-# def create_talking_photo(request):
-#     if request.method == 'POST':
-#         form = TalkingPhotoForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             instance = form.save()
-#             photo_path = os.path.join(settings.MEDIA_ROOT, instance.photo.name)
-#             audio_path = os.path.join(settings.MEDIA_ROOT, 'audios', f'{instance.id}.mp3')
-#             video_path = os.path.join(settings.MEDIA_ROOT, 'videos', f'{instance.id}.mp4')
-
-#             try:
-#                 generate_audio(instance.text, audio_path)
-#                 instance.audio.name = f'audios/{instance.id}.mp3'
-
-#                 generate_video(photo_path, audio_path, video_path)
-#                 instance.video.name = f'videos/{instance.id}.mp4'
-
-#                 instance.save()
-#                 return redirect('show_result', pk=instance.pk)
-
-#             except subprocess.CalledProcessError:
-#                 messages.error(request, "Something went wrong during video generation.\n Please try using a clearer photo with a visible front-facing face.")
-#             except Exception as e:
-#                 messages.error(request, f"An unexpected error occurred: {str(e)}")
-
-#         else:
-#             messages.error(request, "Form data is invalid. Please correct the errors below.")
-#     else:
-#         form = TalkingPhotoForm()
-#     return render(request, 'upload.html', {'form': form})
 def create_talking_photo(request):
     if request.method == 'POST':
         form = TalkingPhotoForm(request.POST, request.FILES)
