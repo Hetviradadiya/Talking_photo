@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib import messages  
 import subprocess
 from .utils.gender_detect import detect_gender
+import glob 
 
 def create_talking_photo(request):
     if request.method == 'POST':
@@ -35,10 +36,22 @@ def create_talking_photo(request):
                 instance.audio.name = f'audios/{instance.id}.mp3'
 
                 generate_video(photo_path, audio_path, video_path)
-                instance.video.name = f'videos/{instance.id}.mp4'
+                # instance.video.name = f'videos/{instance.id}.mp4'
+                video_files = sorted(
+                    glob.glob(os.path.join(settings.MEDIA_ROOT, 'videos', '*.mp4')),
+                    key=os.path.getmtime,
+                    reverse=True
+                )
+                if not video_files:
+                    raise Exception("No video file generated.")
+
+                latest_video_path = video_files[0]
+                relative_video_path = os.path.relpath(latest_video_path, settings.MEDIA_ROOT).replace('\\', '/')
+                instance.video.name = relative_video_path
+                video_filename = os.path.basename(instance.video.name)
 
                 instance.save()
-                return redirect('show_result', pk=instance.pk)
+                return redirect('show_result', video_name=video_filename)
 
             except subprocess.CalledProcessError:
                 messages.error(request, "Something went wrong during video generation.\n Please try using a clearer photo with a visible front-facing face.")
@@ -52,8 +65,8 @@ def create_talking_photo(request):
     return render(request, 'upload.html', {'form': form})
 
 
-def show_result(request, pk):
-    obj = get_object_or_404(TalkingPhoto, pk=pk)
+def show_result(request, video_name):
+    obj = get_object_or_404(TalkingPhoto, video__contains=video_name)
     return render(request, 'result.html', {'obj': obj})
 
 # import glob  # Add at the top

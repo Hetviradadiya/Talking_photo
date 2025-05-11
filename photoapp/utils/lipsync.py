@@ -1,26 +1,3 @@
-# import os
-# import subprocess
-# from django.conf import settings
-# import sys
-
-# def generate_video(face_path, audio_path, output_path):
-#     base_dir = settings.BASE_DIR  # project root
-#     inference_script = os.path.join(base_dir, 'Wav2Lip', 'inference.py')
-#     checkpoint_path = os.path.join(base_dir, 'Wav2Lip', 'checkpoints', 'wav2lip.pth')
-
-#     command = [
-#         sys.executable, # Use virtual environment's Python
-#         inference_script,
-#         '--checkpoint_path', checkpoint_path,
-#         '--face', face_path,
-#         '--audio', audio_path,
-#         '--outfile', output_path
-#     ]
-
-#     subprocess.run(command, check=True)
-
-
-# utils/lipsync.py
 
 import os
 import subprocess
